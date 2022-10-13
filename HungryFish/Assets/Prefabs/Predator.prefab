@@ -137,4 +137,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   predatorRigidbody: {fileID: 1104094392243618513}
-  predatorSpeed: 7
+  predatorSpeed: 15
+  forwardForce: 0
