@@ -1,4 +1,5 @@
 using Mono.Cecil.Cil;
+using System;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -52,7 +53,7 @@ public class Player : MonoBehaviour
             spriteRenderer.flipY = true;
             spriteRenderer.color = Color.red;
             transform.position = new Vector2(0, 0);
-            Time.timeScale = 0.09f;
+            Time.timeScale = 0.10f;
         }
     }
 }

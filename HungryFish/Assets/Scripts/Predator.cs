@@ -22,7 +22,7 @@ public class Predator : MonoBehaviour
         predatorRigidbody.velocity = Vector2.right * forwardForce * Time.deltaTime;
 
         // Destroys predator off-screen
-        if (predatorRigidbody.transform.position.x >= 10)
+        if (predatorRigidbody.transform.position.x >= 20)
         {
             Destroy(gameObject);
         }

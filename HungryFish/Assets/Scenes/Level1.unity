@@ -601,7 +601,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8f0e46853080740b816c45ef6fd333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishSpawner: {fileID: 1104094392243618516, guid: f05fb952ae0dba446a98e43d2ef2cb15, type: 3}
+  topLeftPredator: {fileID: 1104094392243618516, guid: f05fb952ae0dba446a98e43d2ef2cb15, type: 3}
+  bottomLeftPredator: {fileID: 1104094392243618516, guid: f05fb952ae0dba446a98e43d2ef2cb15, type: 3}
 --- !u!1 &1913268278
 GameObject:
   m_ObjectHideFlags: 0
