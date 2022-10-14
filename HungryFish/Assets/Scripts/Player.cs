@@ -40,20 +40,29 @@ public class Player : MonoBehaviour
         {
             transform.Translate(Vector2.down * moveSpeed * Time.deltaTime);
         }
-
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Fish"))
         {
-            player.enabled = false;
-            Debug.Log("Damage Received!");
-            playerHealth -= 1;
-            spriteRenderer.flipY = true;
-            spriteRenderer.color = Color.red;
-            transform.position = new Vector2(0, 0);
-            Time.timeScale = 0.10f;
+            if (other.transform.localScale.sqrMagnitude > transform.localScale.sqrMagnitude)
+            {
+                player.enabled = false;
+                Debug.Log("Damage Received!");
+                playerHealth -= 1;
+                spriteRenderer.flipY = true;
+                spriteRenderer.color = Color.red;
+                transform.position = new Vector2(0, 0);
+                Time.timeScale = 0.10f;
+            }
+            else
+            {
+                if (other.transform.localScale.sqrMagnitude < transform.localScale.sqrMagnitude)
+                {
+                    Destroy(other.gameObject);
+                }
+            }
         }
     }
 }
