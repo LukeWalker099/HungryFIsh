@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public Player player;
     public AudioSource munchSFX;
     public AudioSource healthPowerSFX;
+    public SpriteRenderer heartsImgOne;
+    public SpriteRenderer heartsImgTwo;
 
     public int playerHealth;
     public int moveSpeed;
@@ -20,6 +22,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        heartsImgOne.enabled = true;
+        heartsImgTwo.enabled = false;
         playerHealth = 1;
     }
 
@@ -56,6 +60,18 @@ public class Player : MonoBehaviour
                 spriteRenderer.color = Color.red;
                 spriteRenderer.flipY = true;
                 munchSFX.Play();
+                if (heartsImgTwo.enabled)
+                {
+                    heartsImgTwo.enabled = false;
+                }
+                else
+                {
+                    if (heartsImgTwo.enabled == false)
+                    {
+                        heartsImgOne.enabled = false;
+                    }
+                }
+
                 if (playerHealth <= 0)
                 {
                     player.enabled = false;
@@ -80,6 +96,7 @@ public class Player : MonoBehaviour
         {
             healthPowerSFX.Play();
             playerHealth += 1;
+            heartsImgTwo.enabled = true;
             Destroy(other.gameObject);
         }
     }
