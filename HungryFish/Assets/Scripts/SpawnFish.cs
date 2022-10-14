@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class SpawnFish : MonoBehaviour
 {
     public GameObject topLeftPredator;
-    public GameObject bottomLeftPredator;
+    public GameObject bottomRightPredator;
+    public float forwardForce;
 
     // Start is called before the first frame update
     void Start()
     {
         // Calls the function below and repeats the Instantiate
         InvokeRepeating("spawnPredatorTop", Random.Range(4, 8), Random.Range(6, 12));
-        InvokeRepeating("spawnPredatorBottom", Random.Range(8, 15), Random.Range(10, 6));
+        InvokeRepeating("spawnPredatorBottom", Random.Range(8, 15), Random.Range(10, 16));
     }
 
     private void spawnPredatorTop()
@@ -26,8 +28,7 @@ public class SpawnFish : MonoBehaviour
     }
     void spawnPredatorBottom()
     {
-        Instantiate(bottomLeftPredator, new Vector3(-10, -3.2f), Quaternion.identity);
+        Instantiate(bottomRightPredator, new Vector3(10f, -3.3f), Quaternion.identity);
     }
-
 }
 
