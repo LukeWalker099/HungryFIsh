@@ -1,6 +1,7 @@
 using Mono.Cecil.Cil;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D playerRigidBody;
     public SpriteRenderer spriteRenderer;
     public Player player;
+    public AudioSource munchSFX;
 
     public int playerHealth;
     public int moveSpeed;
@@ -48,20 +50,38 @@ public class Player : MonoBehaviour
         {
             if (other.transform.localScale.sqrMagnitude > transform.localScale.sqrMagnitude)
             {
-                player.enabled = false;
-                Debug.Log("Damage Received!");
                 playerHealth -= 1;
-                spriteRenderer.flipY = true;
-                spriteRenderer.color = Color.red;
                 transform.position = new Vector2(0, 0);
-                Time.timeScale = 0.10f;
-            }
-            else
-            {
-                if (other.transform.localScale.sqrMagnitude < transform.localScale.sqrMagnitude)
+                spriteRenderer.color = Color.red;
+                spriteRenderer.flipY = true;
+                munchSFX.Play();
+                if (playerHealth <= 0)
                 {
-                    Destroy(other.gameObject);
+                    player.enabled = false;
+                    Debug.Log("Damage Received!");
+                    playerHealth -= 1;
+                    spriteRenderer.flipY = true;
+                    spriteRenderer.color = Color.red;
+                    transform.position = new Vector2(0, 0);
+                    Time.timeScale = 0.10f;
                 }
+            }
+        }
+        
+        // Pick up Power Ups
+        if (other.gameObject.CompareTag("Heart"))
+        {
+            playerHealth += 1;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Fish"))
+        {
+            if (playerHealth >= 0)
+            {
+                spriteRenderer.color = Color.white;
+                spriteRenderer.flipY = false;
             }
         }
     }
