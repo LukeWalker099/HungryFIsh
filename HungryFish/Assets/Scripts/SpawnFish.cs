@@ -11,7 +11,7 @@ public class SpawnFish : MonoBehaviour
     void Start()
     {
         // Calls the function below and repeats the Instantiate
-        InvokeRepeating("spawnFish", Random.Range(1, 6), Random.Range(6, 12));
+        InvokeRepeating("spawnFish", Random.Range(1, 3), Random.Range(4, 8));
     }
 
     private void spawnFish()
@@ -19,7 +19,7 @@ public class SpawnFish : MonoBehaviour
         //Spawn fish
         // First Random.Range = X Axis
         // Second Random.Range = Y Axis
-        Instantiate(fishSpawner, new Vector3(Random.Range(-10.3f, -12.35f), Random.Range(3, -3.5f), 0), Quaternion.identity);
+        //SPAWN FISH AT RANDOM: Instantiate(fishSpawner, new Vector3(Random.Range(-10.3f, -12.35f), Random.Range(3, -3.5f), 0), Quaternion.identity);
     }
 
 }

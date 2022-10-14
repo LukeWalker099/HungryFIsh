@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.UIElements;
 
 public class Predator : MonoBehaviour
@@ -9,25 +10,21 @@ public class Predator : MonoBehaviour
     public int predatorSpeed;
     public int forwardForce;
 
+
+    private void Start()
+    {
+
+    }
+
     private void FixedUpdate()
     {
-        // Adds force to predator
-        predatorRigidbody.AddForce(new Vector2 (forwardForce * Time.deltaTime, 0));  
+        // Makes predator move right
+        predatorRigidbody.velocity = Vector2.right * forwardForce * Time.deltaTime;
 
-        // *IMPLEMENT RANDOM.RANGE FOR MOVEMENT*
-        if (predatorRigidbody.transform.position.y < 2.9f)
+        // Destroys predator off-screen
+        if (predatorRigidbody.transform.position.x >= 10)
         {
-            predatorRigidbody.AddForce(Vector2.up * Time.deltaTime * predatorSpeed);
-        }
-        else
-        {
-            if (predatorRigidbody.transform.position.y > -3.6)
-            {
-                new Vector3(Random.Range(-10.3f, -12.35f), Random.Range(3, -3.5f), 0);
-                //predatorRigidbody.AddForce(new Vector2(Random.Range(-10.3f, -12.35f), 0));
-                //predatorRigidbody.AddForce(Vector2.down * Time.deltaTime * predatorSpeed);
-            }
-
+            Destroy(gameObject);
         }
     }
 }
