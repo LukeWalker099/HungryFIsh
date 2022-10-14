@@ -21,7 +21,7 @@ public class SpawnFish : MonoBehaviour
         InvokeRepeating("spawnPredatorTop", Random.Range(4, 8), Random.Range(6, 12));
         InvokeRepeating("spawnPredatorBottom", Random.Range(8, 15), Random.Range(10, 16));
         InvokeRepeating("spawnRedFish", Random.Range(2, 8), Random.Range(4, 12));
-        InvokeRepeating("spawnHealthPickup", Random.Range(1, 2), Random.Range(1, 3));
+        InvokeRepeating("spawnHealthPickup", Random.Range(6, 9), Random.Range(8, 16));
 
         //Calls the function below and repeats the Instantiate to Spawn Powerup
     }
