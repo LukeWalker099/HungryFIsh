@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Player player;
     public AudioSource munchSFX;
+    public AudioSource healthPowerSFX;
 
     public int playerHealth;
     public int moveSpeed;
@@ -66,12 +67,20 @@ public class Player : MonoBehaviour
                     Time.timeScale = 0.10f;
                 }
             }
+            else 
+                if (other.transform.localScale.sqrMagnitude < transform.localScale.sqrMagnitude)
+            {
+                munchSFX.Play();
+                Destroy(other.gameObject);
+            }
         }
         
         // Pick up Power Ups
         if (other.gameObject.CompareTag("Heart"))
         {
+            healthPowerSFX.Play();
             playerHealth += 1;
+            Destroy(other.gameObject);
         }
     }
     private void OnTriggerExit2D(Collider2D other)
