@@ -92,12 +92,23 @@ public class Player : MonoBehaviour
         }
         
         // Pick up Power Ups
-        if (other.gameObject.CompareTag("Heart"))
+        if (other.gameObject.tag == ("Heart"))
         {
-            healthPowerSFX.Play();
-            playerHealth += 1;
-            heartsImgTwo.enabled = true;
-            Destroy(other.gameObject);
+            if (playerHealth < 2)
+            {
+                healthPowerSFX.Play();
+                playerHealth += 1;
+                heartsImgTwo.enabled = true;
+                other.gameObject.SetActive(false);
+                //Destroy(other.gameObject);
+            }
+            else
+            {
+                if (playerHealth >= 2)
+                {
+                    other.gameObject.SetActive(true);
+                }
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D other)
