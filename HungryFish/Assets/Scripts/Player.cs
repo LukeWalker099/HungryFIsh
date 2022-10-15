@@ -4,10 +4,13 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public GameManager _gameManager;
+
     public Rigidbody2D playerRigidBody;
     public SpriteRenderer spriteRenderer;
     public Player player;
@@ -15,6 +18,7 @@ public class Player : MonoBehaviour
     public AudioSource healthPowerSFX;
     public SpriteRenderer heartsImgOne;
     public SpriteRenderer heartsImgTwo;
+    public GameObject retryButton;
 
     public int playerHealth;
     public int moveSpeed;
@@ -74,20 +78,30 @@ public class Player : MonoBehaviour
 
                 if (playerHealth <= 0)
                 {
+                    spriteRenderer.enabled = false;
                     player.enabled = false;
-                    Debug.Log("Damage Received!");
                     playerHealth -= 1;
                     spriteRenderer.flipY = true;
                     spriteRenderer.color = Color.red;
                     transform.position = new Vector2(0, 0);
-                    Time.timeScale = 0.10f;
+                    Time.timeScale = 0.1f;
+                    retryButton.SetActive(true);
                 }
             }
             else 
                 if (other.transform.localScale.sqrMagnitude < transform.localScale.sqrMagnitude)
             {
+                GameManager.fishValue -= 1;
+                GameManager.scoreValue += 1;
                 munchSFX.Play();
                 Destroy(other.gameObject);
+                
+                if (GameManager.fishValue <= 0)
+                {
+                    // Display Level Complete
+                    Debug.Log("Level Complete");
+                    _gameManager.LevelComplete();
+                }
             }
         }
         
@@ -109,6 +123,14 @@ public class Player : MonoBehaviour
                     other.gameObject.SetActive(true);
                 }
             }
+        }
+
+        // Pick up Coin
+
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            GameManager.coinValue += 10;
+            Destroy(other.gameObject);
         }
     }
     private void OnTriggerExit2D(Collider2D other)
